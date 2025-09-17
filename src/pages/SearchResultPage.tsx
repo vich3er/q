@@ -22,7 +22,7 @@ export const SearchResultPage = () => {
 
     const [loading, setLoading] = useState<boolean>(true);
     const searchName = q || ''
-
+const pageNumber ='1';
     useEffect(() => {
         if (q) {
 
@@ -30,12 +30,12 @@ export const SearchResultPage = () => {
 
                 const [companiesRes, collectionsRes, moviesRes,
                     keywordsRes, personsRes, tvsRes] = await Promise.all([
-                    getCompany(searchName),
-                    getCollection(searchName),
-                    getMovie(searchName),
-                    getKeyword(searchName),
-                    getPerson(searchName),
-                    getTV(searchName)
+                    getCompany(searchName,pageNumber ),
+                    getCollection(searchName, pageNumber),
+                    getMovie(searchName, pageNumber),
+                    getKeyword(searchName, pageNumber),
+                    getPerson(searchName, pageNumber),
+                    getTV(searchName, pageNumber),
                 ])
 
                 setCompanies(companiesRes);
@@ -45,7 +45,7 @@ export const SearchResultPage = () => {
                 setPersons(personsRes);
                 setTvs(tvsRes);
                 setLoading(false);
-                console.log("ЗАПИТ ДО АПІ💋💋💋💋");
+                // console.log("ЗАПИТ ДО АПІ💋💋💋💋");
 
             };
 
@@ -54,8 +54,8 @@ export const SearchResultPage = () => {
 
 
         }
-    }, [])
-    console.log('rerender');
+    }, [q])
+    // console.log('rerender');
 
     return (
 
@@ -99,7 +99,8 @@ export const SearchResultPage = () => {
                         </div>
 
 
-                        <div>
+                        <div className={'flex flex-col '}>
+                            <span className={'my-3'}>Search results by query <span className={'font-bold'}>"{q}"</span> </span>
                             <Outlet/>
                         </div>
                     </div>

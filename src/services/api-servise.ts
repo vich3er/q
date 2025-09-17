@@ -18,8 +18,8 @@ const axiosInstance = axios.create({
 })
 
 
-export const getInfo = async <T>(name: string, endpoint:string):Promise<IResponse<T>> => {
-const {data} = await axiosInstance.get<IResponse<T>>(`/search/${endpoint}?query=` + name);
+export const getInfo = async <T>(name: string, endpoint:string,page: string ):Promise<IResponse<T>> => {
+const {data} = await axiosInstance.get<IResponse<T>>(`/search/${endpoint}?query=` + name + `&page=${page}`);
 return data as IResponse<T>;
 }
 
@@ -29,26 +29,26 @@ export const getInfoById = async <T> (id: string, endpoint:string):Promise<T> =>
     return data as T;
 }
 
-export const getCompany = (name: string)=> {
-   return  getInfo<ICompany>(name, 'company');
+export const getCompany = (name: string, page: string)=> {
+   return  getInfo<ICompany>(name, 'company', page);
 }
-export const getCollection = (name: string)=>{
-  return   getInfo<ICollection>(name, 'collection');
-}
-
-export const getKeyword = (name: string)=>{
-return getInfo<IKeyword>(name, 'keyword');
-}
-export const getMovie = (name: string)=>{
-    return getInfo<IMovie>(name, 'movie');
-}
-export const getPerson = (name: string)=> {
-    return getInfo<IPerson>(name, 'person');
-}
-export const getTV = (name: string) => {
-    return getInfo<ITV>(name, 'tv');
+export const getCollection = (name: string, page: string)=>{
+  return   getInfo<ICollection>(name, 'collection', page);
 }
 
+export const getKeyword = (name: string, page: string)=>{
+return getInfo<IKeyword>(name, 'keyword', page);
+}
+export const getMovie = (name: string, page: string)=>{
+    return getInfo<IMovie>(name, 'movie', page);
+}
+export const getPerson = (name: string, page: string)=> {
+    return getInfo<IPerson>(name, 'person', page);
+}
+export const getTV = (name: string, page: string) => {
+    return getInfo<ITV>(name, 'tv', page);
+}
+// пошук всього що є на апі по назві
 export const getMulti = (name: string)=> {
-    return getInfo<IMulti>(name, 'multi');
+    return getInfo<IMulti>(name, 'multi', '1');
 }

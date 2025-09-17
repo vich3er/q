@@ -4,8 +4,8 @@ import {guestSlice} from "./slices/guestSlice.ts";
 export const store = configureStore(
     {
 reducer: {
-    guestSlice: guestSlice.reducer,
-
+     // guestSlice: guestSlice.reducer,
+// searchByNameSlice: seachByNameSlice.reducer,
 }
     }
 );

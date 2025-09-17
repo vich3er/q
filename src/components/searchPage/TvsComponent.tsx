@@ -1,4 +1,4 @@
-import {type FC, useState} from "react";
+import {type FC, useEffect, useState} from "react";
 import withoutImg from '../../assets/img.png';
 import {Link} from "react-router-dom";
 
@@ -24,14 +24,25 @@ export const TvsComponent: FC<TvsCompProps> = ({
                                                    id
                                                }) => {
 
-    const [imgSrc, setImgSrc] = useState(
-        poster_path && !poster_path.includes('null') ?
-            `${import.meta.env.VITE_API_IMG}${poster_path}` : withoutImg
-    )
+    // const [imgSrc, setImgSrc] = useState(
+    //     poster_path && !poster_path.includes('null') ?
+    //         `${import.meta.env.VITE_API_IMG}${poster_path}` : withoutImg
+    // )
+
+    const [imgSrc, setImgSrc] = useState(withoutImg);
+
+    useEffect(() => {
+        if (poster_path && !poster_path.includes('null')) {
+            setImgSrc(`${import.meta.env.VITE_API_IMG}${poster_path}`);
+        }
+    }, [poster_path ]);
+
     // console.log(imgSrc);
     const handleImgError = () => {
         setImgSrc(withoutImg)
         setIsLoading(false)
+        //Викликається, якщо зображення не вдалося завантажити (наприклад, битий лінк).
+        //Це потрібно, щоб не показувати пустий квадрат чи "зламану картинку".
         // console.log("rerender img");
     }
 
@@ -44,9 +55,10 @@ export const TvsComponent: FC<TvsCompProps> = ({
         <div
             className={'border border-gray-300 rounded-xl max-h-[141px] max-w-[1140px] mb-2  shadow-md overflow-hidden flex'}>
 
-            <img className={'w-[94px] '} src={loading ? withoutImg : imgSrc} alt={name || original_name}
+            <img className={`w-[94px] ${imgSrc!=withoutImg? 'transition-opacity duration-500 opacity-100': ''}`} src={imgSrc} alt={name || original_name}
                  onError={handleImgError}
                  onLoad={handleImgLoad}/>
+
             <div className={'p-2 flex flex-col justify-center  px-[10px] py-[15px]'}>
                 <div>
                     <div className={'flex flex-row'} >
