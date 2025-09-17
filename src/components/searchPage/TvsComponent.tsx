@@ -14,7 +14,7 @@ interface TvsCompProps {
 }
 
 
-export const TvsComponent: FC<TvsCompProps> = ({
+export const  TvsComponent: FC<TvsCompProps> = ({
                                                    original_name,
                                                    overview,
                                                    first_air_date,
