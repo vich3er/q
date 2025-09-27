@@ -12,10 +12,7 @@ export const Menu = () => {
 
                   <NavLink to={''} className={({isActive})=>(isActive? active: '')} >home</NavLink>
                   <NavLink to={'/films'} className={({isActive})=>(isActive? active: '')} >films</NavLink>
-                  <NavLink to={'/series'} className={({isActive}) =>(isActive? active: "")} >series</NavLink>
-                  <NavLink to={'/people'}  className={({isActive})=>(isActive? active:"")}>people</NavLink>
-                  <NavLink to={'/more'} className={({isActive})=> (isActive? active: '')}>more</NavLink>
-                    {/**/}
+                  <NavLink to={'/tvs'} className={({isActive}) =>(isActive? active: "")} >series</NavLink>
                     <SearchComponent/>
 
 

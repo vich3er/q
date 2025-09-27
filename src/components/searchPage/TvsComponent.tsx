@@ -55,9 +55,11 @@ export const  TvsComponent: FC<TvsCompProps> = ({
         <div
             className={'border border-gray-300 rounded-xl max-h-[141px] max-w-[1140px] mb-2  shadow-md overflow-hidden flex'}>
 
-            <img className={`w-[94px] ${imgSrc!=withoutImg? 'transition-opacity duration-500 opacity-100': ''}`} src={imgSrc} alt={name || original_name}
-                 onError={handleImgError}
-                 onLoad={handleImgLoad}/>
+
+             <img src={imgSrc} className={`w-[94px] `}  alt={name || original_name}
+                  onError={handleImgError}
+                  onLoad={handleImgLoad}/>
+
 
             <div className={'p-2 flex flex-col justify-center  px-[10px] py-[15px]'}>
                 <div>

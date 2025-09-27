@@ -38,6 +38,8 @@ const pageNumber ='1';
                     getTV(searchName, pageNumber),
                 ])
 
+
+                // в редакс нахуй тут все передавати!!!
                 setCompanies(companiesRes);
                 setCollections(collectionsRes);
                 setMovies(moviesRes);
@@ -83,18 +85,7 @@ const pageNumber ='1';
                                    <Link to={'persons?q='+searchName} state={{persons}}>   <div>Люди</div></Link>
                                    <div>{persons?.total_results || 0}</div>
                                </div>
-                               <div className={'flex justify-between hover:bg-yellow-500 transition duration-100 '}>
-                                   <Link  to={'keywords?q='+searchName} state={{keywords}}>  <div>Ключові слова</div></Link>
-                                   <div>{keywords?.total_results || 0}</div>
-                               </div>
-                               <div className={'flex  justify-between hover:bg-yellow-500 transition duration-100  '}>
-                                   <Link to={'collections?q='+searchName} state={{collections}}> <div>Колекції</div></Link>
-                                   <div>{collections?.total_results || 0}</div>
-                               </div>
-                               <div className={'flex justify-between hover:bg-yellow-500 transition duration-100 '}>
-                                   <Link to={'companies?q='+searchName} state={{companies}}><div>Компанії</div></Link>
-                                   <div>{companies?.total_results || 0}</div>
-                               </div>
+
                            </div>
                         </div>
 

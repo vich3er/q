@@ -25,9 +25,9 @@ export const TvPage = () => {
     console.log(info);
 
     return (
-        <div className={ 'w-[100vw] '}  >
+        <div className={ ' '}  >
             {
-                info && <LargePosterComponent title={info.name} backdrop_path={info.backdrop_path}
+                info && <LargePosterComponent id={info.id} title={info.name} backdrop_path={info.backdrop_path}
                                               poster_path={info.poster_path}
                                               release_date={info.first_air_date}
                                               overview={info.overview}

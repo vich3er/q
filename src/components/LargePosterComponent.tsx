@@ -6,12 +6,13 @@ import type {IMovieDetails} from "../models/IMovieDetails.ts";
 import {TinyColor} from "@ctrl/tinycolor";
 import {buildStyles, CircularProgressbar} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import TrailerComponent from "./TrailerComponent.tsx";
 
 
 type Media = ITvDetails | IMovieDetails;
 
 interface LargePosterComponentProps {
-
+    id: number;
     title: string;
     backdrop_path: string;
     poster_path: string;
@@ -25,7 +26,7 @@ interface LargePosterComponentProps {
 }
 
 export const LargePosterComponent: FC<LargePosterComponentProps> = ({
-
+                                                                        id,
                                                                         title,
                                                                         poster_path,
                                                                         backdrop_path,
@@ -54,39 +55,35 @@ export const LargePosterComponent: FC<LargePosterComponentProps> = ({
     }, [poster_path, backdrop_path]);
 
 
-
 // спитати!!!!
-   let data, loading, error;
-   try {
-       (
-           {data, loading, error} = useColor(posterSrc, 'hex', {
-               crossOrigin: "anonymous",
-               quality: 10,
-           })
-       )
-   }
-     catch (e){
-         console.log("useColor error \n" + e);
-         error = true;
+    let data, loading, error;
+    try {
+        (
+            {data, loading, error} = useColor(posterSrc, 'hex', {
+                crossOrigin: "anonymous",
+                quality: 10,
+            })
+        )
+    } catch (e) {
+        console.log("useColor error \n" + e);
+        error = true;
 
-     }
-
-    // const {data, loading, error} = useColor(posterSrc, "hex", {
-    //     crossOrigin: 'anonymous',
-    //     quality: 10,
-    // });
+    }
     console.log(loading, error);
     const bgColor = error ? 'bg-black/80' : data
     const color = new TinyColor(bgColor);
     const fontColor = color.isLight() ? 'text-black' : 'text-white'
     const genreStyle = color.isLight() ? 'bg-white text-black inline p-1 rounded-md   mr-1' : 'bg-black text-yellow inline p-1 rounded-md border-grey-500   mr-1'
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
 
     const rating = !vote_average ? 0 : vote_average * 10
     return (
         <>
             {
-                bgColor&&
+                bgColor &&
                 <>
                     <div className={` ${fontColor} relative w-[100vw] h-[90vh]   flex items-center`}>
 
@@ -97,7 +94,7 @@ export const LargePosterComponent: FC<LargePosterComponentProps> = ({
 
                         <div className=" relative z-[15] flex  gap-10 p-5">
 
-                            <img className="w-xs rounded-md  " src={posterSrc} alt={title}/>
+                            <img className="min-w-50 max-w-xs h-full rounded-md" src={posterSrc} alt={title}/>
                             {/* w-75*/}
                             <div className={'flex flex-col justify-center'}>
                                 <div>
@@ -117,7 +114,8 @@ export const LargePosterComponent: FC<LargePosterComponentProps> = ({
                                     <div className={'h-[70px] w-[70px]'}>
                                         {
                                             <CircularProgressbar value={rating} maxValue={100}
-                                                                 text={Math.floor(rating).toString() + "%"} strokeWidth={8}
+                                                                 text={Math.floor(rating).toString() + "%"}
+                                                                 strokeWidth={8}
                                                                  background={true}
                                                                  backgroundPadding={10}
                                                                  styles={buildStyles(
@@ -143,17 +141,20 @@ export const LargePosterComponent: FC<LargePosterComponentProps> = ({
                                         <br/>
                                         score
                                     </p>
-                                    <button className={'bg-red-500 p-1 text-white rounded-2xl'}>
-                                        Trailer
-                                    </button>
+
+
+                                    <TrailerComponent itemId={id.toString()}/>
                                 </div>
-
-
+                                {/*<img*/}
+                                {/*    className="hidden md:block h-full  max-w-[30vw]  ] aspect-square sm:mt-[100px]"*/}
+                                {/*    src="Image (2).png"*/}
+                                {/*    alt="Опис зображення"*/}
+                                {/*/>*/}
 
                                 <div>
                                     <p className={'italic opacity-80'}>{tagline}</p>
                                     {
-                                        overview&&
+                                        overview &&
                                         <>
                                             <h1 className={'text-2xl font-bold'}>overview</h1>
                                             <p>{overview}</p>
@@ -167,5 +168,6 @@ export const LargePosterComponent: FC<LargePosterComponentProps> = ({
                 </>
             }
         </>
+
     );
 };
