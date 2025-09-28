@@ -8,59 +8,55 @@ import PaginationComponent from "../components/PaginationComponent.tsx";
 
 
 export const SearchResultPageTvs = () => {
-
-
-
+    
     const [searchParams] = useSearchParams();
     const [tvs, setTvs] = useState<IResponse<ITV> | null>(null);
-
-
-
-    const q = searchParams.get("q") || ''
+    const q = searchParams.get("q") || '';
+    const pageNumber = searchParams.get("pg") || '1';
     useEffect(() => {
 
-            const getInfo = async () => {
-                const res = await getTV(searchParams.get("q") || '', '1');
-                setTvs(res)
-                // console.log("ЗАПИТ ДО АПІ💋💋💋💋");
+        const getInfo = async () => {
+            const res = await getTV(searchParams.get("q") || '', pageNumber);
+            setTvs(res)
 
-            }
 
-            if (q) getInfo();
+        }
+
+        if (q) getInfo();
         // }
 
-    }, [q]);
-    // console.log(tvs);
+    }, [q, searchParams]);
+    console.log(tvs);
 
     // console.log(tvs);
     return (
-       <>
+        <>
 
 
 
 
-           <div className={''}>
-               {
-                   tvs && (
-                       <>
-                           {
-                               tvs.results.map((item) => <TvsComponent key={item.id}
-                                                                       name={item.name}
-                                                                       poster_path={item.poster_path}
-                                                                       original_name={item.original_name}
-                                                                       backdrop_path={item.backdrop_path}
-                                                                       first_air_date={item.first_air_date}
-                                                                       overview={item.overview}
-                                                                       id = {item.id}
-                                   />
+            <div className={''}>
+                {
+                    tvs && (
+                        <>
+                            {
+                                tvs.results.map((item) => <TvsComponent key={item.id}
+                                                                        name={item.name}
+                                                                        poster_path={item.poster_path}
+                                                                        original_name={item.original_name}
+                                                                        backdrop_path={item.backdrop_path}
+                                                                        first_air_date={item.first_air_date}
+                                                                        overview={item.overview}
+                                                                        id = {item.id}
+                                    />
 
-                               )}
-                             <PaginationComponent totalPages={tvs.total_pages }/>
+                                )}
+                            <PaginationComponent totalPages={tvs.total_pages }/>
 
-                       </>
-                   )
-               }
-           </div>
-       </>
+                        </>
+                    )
+                }
+            </div>
+        </>
     );
 };

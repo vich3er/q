@@ -1,11 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {guestSlice} from "./slices/guestSlice.ts";
+import {searchByNameSlice} from "./slices/seachByNameSlice.ts";
 
-export const store = configureStore(
-    {
-reducer: {
-     // guestSlice: guestSlice.reducer,
-// searchByNameSlice: seachByNameSlice.reducer,
-}
+export const store = configureStore({
+    reducer: {
+        searchByNameSlice: searchByNameSlice.reducer,
     }
-);
+});
+export type RootState = ReturnType<typeof store.getState>

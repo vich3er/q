@@ -11,7 +11,7 @@ export const SearchComponent = () => {
     const wrapperRef = useRef<HTMLDivElement>(null);
 
 
-    useEffect(() => {
+  /*  useEffect(() => {
 // розібратись з сет тайм аут
         const getResults = async () => {
             const response = await getMulti(searchName);
@@ -41,6 +41,8 @@ export const SearchComponent = () => {
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside); // прибрати івеент лісенер при розмонтовуванні компонента, наприклад при переході на стоорінку де його нема
     }, [])
+    */
+
 
     console.log(searchName);
     const navigate = useNavigate();
@@ -68,24 +70,24 @@ export const SearchComponent = () => {
                 <button type='submit' className={'bg-yellow-400 h-9 p-1 text-black rounded-md'}>search</button>
             </form>
 
-            <div className={' bg-white overflow-y-auto absolute top-10 w-75'}>
-                {
-                    info && info.slice(0, 10).map((item) =>
-                        <div className={'flex '} key={item.id}>
+            {/*<div className={' bg-white overflow-y-auto absolute top-10 w-75'}>*/}
+            {/*    {*/}
+            {/*        info && info.slice(0, 10).map((item) =>*/}
+            {/*            <div className={'flex '} key={item.id}>*/}
 
-                            <div>
-                                {
-                                    item.original_name || item.original_title || item.title
-                                }
-                            </div>
-                            <div className={'ml-10'}>
-                                {item.media_type}
-                            </div>
+            {/*                <div>*/}
+            {/*                    {*/}
+            {/*                        item.original_name || item.original_title || item.title*/}
+            {/*                    }*/}
+            {/*                </div>*/}
+            {/*                <div className={'ml-10'}>*/}
+            {/*                    {item.media_type}*/}
+            {/*                </div>*/}
 
-                        </div>)
+            {/*            </div>)*/}
 
-                }
-            </div>
+            {/*    }*/}
+            {/*</div>*/}
         </div>
 
     );

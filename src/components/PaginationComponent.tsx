@@ -5,6 +5,7 @@ const PaginationComponent = ({totalPages}: { totalPages: number }) => {
     const [query, setQuery] = useSearchParams({pg: '1'});// візьме поточну кверю і якшо пг нема то встановить як 1
     const pg = query.get('pg') || "1";
     console.log(pg);
+    console.log(pg);
     const [isPreviousBtnDisabled, setIsPreviousBtnDisabled] = useState<boolean>((): boolean => {
         return +pg <= 1
     });
